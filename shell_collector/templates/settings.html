@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shell Collector - Settings</title>
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+    <header id="topbar">
+        <h1>Shell Collector</h1>
+        <span id="user-display"></span>
+        <a id="settings-link" href="/settings">Settings</a>
+        <button id="logout-btn">Logout</button>
+    </header>
+    <div id="pane-container">
+        <div class="settings-page">
+            <a id="back-link" href="/">&larr; Dashboard</a>
+            <h2>User Management</h2>
+
+            <div id="user-form-container" class="user-form hidden">
+                <h3 id="user-form-title">Create User</h3>
+                <div class="form-group">
+                    <label for="user-username">Username</label>
+                    <input type="text" id="user-username">
+                </div>
+                <div class="form-group">
+                    <label for="user-password">Password</label>
+                    <input type="password" id="user-password" placeholder="Leave blank to keep current">
+                </div>
+                <div class="form-group checkbox-group">
+                    <input type="checkbox" id="user-is-admin">
+                    <label for="user-is-admin">Admin</label>
+                </div>
+                <p id="user-form-error" class="form-error hidden"></p>
+                <button id="user-form-save" class="btn btn-primary">Save</button>
+                <button id="user-form-cancel" class="btn">Cancel</button>
+            </div>
+
+            <button id="show-create-form" class="btn btn-primary">Create User</button>
+
+            <table class="user-table">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Username</th>
+                        <th>Admin</th>
+                        <th>Created</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody id="user-table-body"></tbody>
+            </table>
+
+            <hr class="section-divider">
+
+            <h2>Integrations</h2>
+
+            <div class="form-group">
+                <label for="discord-webhook">Discord Webhook URL</label>
+                <input type="url" id="discord-webhook" placeholder="https://discord.com/api/webhooks/...">
+                <p class="form-hint">When a new shell connects, a notification will be sent to this Discord channel.</p>
+                <p id="webhook-error" class="form-error hidden"></p>
+                <p id="webhook-success" class="form-success hidden"></p>
+                <button id="webhook-save" class="btn btn-primary">Save</button>
+            </div>
+        </div>
+    </div>
+    <script src="/static/settings.js"></script>
+</body>
+</html>

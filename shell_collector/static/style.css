@@ -1,0 +1,810 @@
+*, *::before, *::after {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: monospace;
+    background: #080808;
+    color: #c9c9c9;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+a { color: #dd0606; }
+a:hover { text-decoration: underline; }
+
+.hidden { display: none !important; }
+.error { color: #dd0606; font-size: 13px; margin-top: 4px; }
+
+/* Auth pages */
+.auth-page {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.auth-box {
+    background: #171717;
+    border: 1px solid #333333;
+    border-radius: 8px;
+    padding: 40px;
+    width: 360px;
+    text-align: center;
+}
+
+.auth-box h1 {
+    margin-bottom: 24px;
+    font-size: 22px;
+}
+
+.auth-box form {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.auth-box input {
+    background: #080808;
+    border: 1px solid #333333;
+    border-radius: 6px;
+    color: #c9c9c9;
+    padding: 10px 12px;
+    font-size: 14px;
+    font-family: inherit;
+}
+
+.auth-box input:focus {
+    outline: none;
+    border-color: #dd0606;
+}
+
+.auth-box button {
+    background: #dd0606;
+    color: #fff;
+    border: none;
+    border-radius: 6px;
+    padding: 10px;
+    font-size: 14px;
+    cursor: pointer;
+    font-family: inherit;
+}
+
+.auth-box button:hover {
+    background: #ff1a1a;
+}
+
+.auth-link {
+    margin-top: 16px;
+    font-size: 13px;
+    color: #777777;
+}
+
+/* Topbar */
+#topbar {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    padding: 10px 20px;
+    background: #171717;
+    border-bottom: 1px solid #333333;
+}
+
+#topbar h1 {
+    font-size: 18px;
+    margin-right: auto;
+}
+
+#user-display {
+    color: #777777;
+    font-size: 13px;
+}
+
+#settings-link {
+    color: #dd0606;
+    font-size: 13px;
+    text-decoration: none;
+}
+#settings-link:hover {
+    text-decoration: underline;
+}
+
+#logout-btn {
+    background: transparent;
+    border: 1px solid #333333;
+    color: #c9c9c9;
+    padding: 4px 12px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-family: inherit;
+    font-size: 12px;
+}
+
+#logout-btn:hover {
+    background: #2a2a2a;
+}
+
+#payload-btn {
+    background: #dd0606;
+    border: none;
+    color: #fff;
+    padding: 4px 14px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-family: inherit;
+    font-size: 12px;
+    font-weight: bold;
+}
+
+#payload-btn:hover {
+    background: #ff1a1a;
+}
+
+/* Panes */
+#pane-container {
+    display: flex;
+    flex: 1;
+    overflow: hidden;
+}
+
+#listener-pane {
+    width: 260px;
+    min-width: 200px;
+    border-right: 1px solid #333333;
+    display: flex;
+    flex-direction: column;
+    background: #171717;
+}
+
+#shell-pane {
+    width: 280px;
+    min-width: 200px;
+    border-right: 1px solid #333333;
+    display: flex;
+    flex-direction: column;
+    background: #171717;
+}
+
+#terminal-pane {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    background: #080808;
+}
+
+#pane-container h2 {
+    font-size: 13px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: #777777;
+}
+
+.pane-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 12px 16px;
+    border-bottom: 1px solid #333333;
+}
+
+.hide-toggle {
+    font-size: 11px;
+    color: #777777;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    cursor: pointer;
+    user-select: none;
+}
+
+.hide-toggle input {
+    accent-color: #dd0606;
+}
+
+/* Listener list */
+#listener-list, #shell-list {
+    flex: 1;
+    overflow-y: auto;
+    padding: 4px 0;
+}
+
+.listener-item, .shell-item {
+    padding: 10px 16px;
+    cursor: pointer;
+    border-bottom: 1px solid #333333;
+    transition: background 0.15s;
+}
+
+.listener-item:hover, .shell-item:hover {
+    background: #2a2a2a;
+}
+
+.listener-item.selected, .shell-item.selected {
+    background: #ffffff11;
+    border-left: 3px solid #ffffff;
+}
+
+.listener-address {
+    font-size: 14px;
+    color: #c9c9c9;
+}
+
+.listener-meta {
+    font-size: 11px;
+    color: #777777;
+    margin-top: 3px;
+    display: flex;
+    gap: 8px;
+}
+
+.listener-status {
+    color: #dd0606;
+}
+
+.listener-status.inactive {
+    color: #dd0606;
+}
+
+.listener-actions {
+    margin-top: 6px;
+}
+
+.delete-btn {
+    background: transparent;
+    border: 1px solid #dd060655;
+    color: #dd0606;
+    padding: 2px 8px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 11px;
+    font-family: inherit;
+}
+
+.delete-btn:hover {
+    background: #dd060611;
+}
+
+.delete-btn.danger {
+    border-color: #dd0606;
+}
+
+.shell-item.disconnected {
+    opacity: 0.5;
+}
+
+.shell-item .kill-btn {
+    display: none;
+    margin-top: 4px;
+    background: transparent;
+    border: 1px solid #dd060655;
+    color: #dd0606;
+    padding: 2px 8px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 11px;
+    font-family: inherit;
+}
+.shell-item:hover .kill-btn {
+    display: inline-block;
+}
+.shell-item .kill-btn:hover {
+    background: #dd060611;
+}
+
+.shell-ip {
+    font-size: 14px;
+    color: #c9c9c9;
+}
+
+.shell-meta {
+    font-size: 11px;
+    color: #777777;
+    margin-top: 2px;
+}
+
+.empty-msg {
+    color: #555555;
+    font-size: 13px;
+    padding: 24px 16px;
+    text-align: center;
+}
+
+/* Listener form */
+#listener-form {
+    padding: 12px 16px;
+    border-top: 1px solid #333333;
+}
+
+.form-row {
+    display: flex;
+    gap: 6px;
+}
+
+#listener-form input {
+    background: #080808;
+    border: 1px solid #333333;
+    border-radius: 4px;
+    color: #c9c9c9;
+    padding: 6px 8px;
+    font-size: 12px;
+    font-family: inherit;
+    flex: 1;
+    min-width: 0;
+}
+
+#listener-form input:focus {
+    outline: none;
+    border-color: #dd0606;
+}
+
+#listener-port {
+    max-width: 80px;
+}
+
+#start-listener-btn {
+    background: #dd0606;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    padding: 6px 12px;
+    cursor: pointer;
+    font-size: 12px;
+    font-family: inherit;
+    white-space: nowrap;
+}
+
+#start-listener-btn:hover {
+    background: #ff1a1a;
+}
+
+/* Terminal */
+#terminal-output {
+    flex: 1;
+    overflow-y: auto;
+    padding: 16px;
+    font-size: 13px;
+    line-height: 1.5;
+    white-space: pre-wrap;
+    word-break: break-all;
+}
+
+#terminal-output .placeholder {
+    color: #555555;
+}
+
+#command-form {
+    display: flex;
+    padding: 12px 16px;
+    gap: 8px;
+    border-top: 1px solid #333333;
+    background: #171717;
+}
+
+#command-input {
+    flex: 1;
+    background: #080808;
+    border: 1px solid #333333;
+    border-radius: 6px;
+    color: #c9c9c9;
+    padding: 10px 12px;
+    font-size: 13px;
+    font-family: inherit;
+}
+
+#command-input:focus {
+    outline: none;
+    border-color: #dd0606;
+}
+
+#send-btn {
+    background: #dd0606;
+    color: #fff;
+    border: none;
+    border-radius: 6px;
+    padding: 10px 20px;
+    cursor: pointer;
+    font-size: 13px;
+    font-family: inherit;
+}
+
+#send-btn:hover:not(:disabled) {
+    background: #ff1a1a;
+}
+
+#send-btn:disabled, #command-input:disabled {
+    opacity: 0.4;
+    cursor: not-allowed;
+}
+
+/* Scrollbar */
+::-webkit-scrollbar {
+    width: 8px;
+}
+::-webkit-scrollbar-track {
+    background: transparent;
+}
+::-webkit-scrollbar-thumb {
+    background: #333333;
+    border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+    background: #555555;
+}
+
+/* Settings page */
+.settings-page {
+    padding: 24px 32px;
+    flex: 1;
+    overflow-y: auto;
+}
+
+.settings-page h2 {
+    font-size: 16px;
+    margin-bottom: 16px;
+}
+
+.user-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 24px;
+}
+
+.user-table th,
+.user-table td {
+    padding: 10px 12px;
+    text-align: left;
+    border-bottom: 1px solid #333333;
+    font-size: 13px;
+}
+
+.user-table th {
+    color: #777777;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    font-size: 11px;
+    border-bottom-color: #333333;
+}
+
+.user-table tr:hover td {
+    background: #2a2a2a;
+}
+
+.user-table .actions {
+    display: flex;
+    gap: 6px;
+}
+
+.btn {
+    background: #333333;
+    border: 1px solid #333333;
+    color: #c9c9c9;
+    padding: 4px 12px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-family: inherit;
+    font-size: 12px;
+}
+.btn:hover {
+    background: #444444;
+}
+.btn-primary {
+    background: #dd0606;
+    border-color: #dd0606;
+    color: #fff;
+}
+.btn-primary:hover {
+    background: #ff1a1a;
+}
+.btn-danger {
+    border-color: #dd060655;
+    color: #dd0606;
+}
+.btn-danger:hover {
+    background: #dd060611;
+}
+
+.user-form {
+    background: #171717;
+    border: 1px solid #333333;
+    border-radius: 8px;
+    padding: 20px;
+    margin-bottom: 24px;
+    max-width: 480px;
+}
+
+.user-form h3 {
+    font-size: 14px;
+    margin-bottom: 12px;
+}
+
+.user-form .form-group {
+    margin-bottom: 12px;
+}
+
+.user-form label {
+    display: block;
+    font-size: 12px;
+    color: #777777;
+    margin-bottom: 4px;
+}
+
+.user-form input[type="text"],
+.user-form input[type="password"] {
+    width: 100%;
+    background: #080808;
+    border: 1px solid #333333;
+    border-radius: 4px;
+    color: #c9c9c9;
+    padding: 8px 10px;
+    font-size: 13px;
+    font-family: inherit;
+    box-sizing: border-box;
+}
+
+.user-form input:focus {
+    outline: none;
+    border-color: #dd0606;
+}
+
+.user-form .checkbox-group {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.user-form .checkbox-group label {
+    margin-bottom: 0;
+    cursor: pointer;
+}
+
+.user-form .checkbox-group input {
+    accent-color: #dd0606;
+}
+
+.user-form .form-error {
+    color: #dd0606;
+    font-size: 12px;
+    margin-top: 4px;
+}
+
+#back-link {
+    display: inline-block;
+    margin-bottom: 16px;
+    color: #dd0606;
+    font-size: 13px;
+    text-decoration: none;
+}
+#back-link:hover {
+    text-decoration: underline;
+}
+
+.section-divider {
+    border: none;
+    border-top: 1px solid #333333;
+    margin: 32px 0;
+}
+
+.settings-page .form-group {
+    margin-bottom: 12px;
+    max-width: 480px;
+}
+
+.settings-page .form-group label {
+    display: block;
+    font-size: 12px;
+    color: #777777;
+    margin-bottom: 4px;
+}
+
+.settings-page .form-group input[type="url"],
+.settings-page .form-group input[type="text"] {
+    width: 100%;
+    background: #080808;
+    border: 1px solid #333333;
+    border-radius: 4px;
+    color: #c9c9c9;
+    padding: 8px 10px;
+    font-size: 13px;
+    font-family: inherit;
+    box-sizing: border-box;
+}
+
+.settings-page .form-group input:focus {
+    outline: none;
+    border-color: #dd0606;
+}
+
+.form-hint {
+    font-size: 11px;
+    color: #777777;
+    margin-top: 4px;
+}
+
+.form-success {
+    color: #22c55e;
+    font-size: 12px;
+    margin-top: 4px;
+}
+
+/* Error pages */
+.error-page {
+    text-align: center;
+}
+.error-page h1 {
+    font-size: 64px;
+    color: #dd0606;
+    margin-bottom: 8px;
+}
+.error-subtitle {
+    font-size: 18px;
+    color: #c9c9c9;
+    margin-bottom: 12px;
+}
+.error-description {
+    font-size: 13px;
+    color: #777777;
+    margin-bottom: 24px;
+}
+.error-page .btn {
+    display: inline-block;
+    padding: 10px 24px;
+    font-size: 14px;
+    text-decoration: none;
+}
+
+/* Payload modal */
+.modal-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.7);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+}
+
+.modal {
+    background: #171717;
+    border: 1px solid #333333;
+    border-radius: 8px;
+    width: 680px;
+    max-width: 95vw;
+    max-height: 85vh;
+    display: flex;
+    flex-direction: column;
+}
+
+.modal-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 16px 20px;
+    border-bottom: 1px solid #333333;
+}
+
+.modal-header h2 {
+    font-size: 16px;
+    text-transform: none;
+    letter-spacing: normal;
+    color: #c9c9c9;
+}
+
+.modal-close {
+    background: none;
+    border: none;
+    color: #777777;
+    font-size: 22px;
+    cursor: pointer;
+    padding: 0 4px;
+    font-family: inherit;
+}
+.modal-close:hover {
+    color: #c9c9c9;
+}
+
+.modal-body {
+    padding: 20px;
+    overflow-y: auto;
+}
+
+.payload-config {
+    display: flex;
+    gap: 12px;
+    margin-bottom: 20px;
+}
+
+.config-group {
+    flex: 1;
+}
+
+.config-group label {
+    display: block;
+    font-size: 11px;
+    color: #777777;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-bottom: 4px;
+}
+
+.config-group input {
+    width: 100%;
+    background: #080808;
+    border: 1px solid #333333;
+    border-radius: 4px;
+    color: #c9c9c9;
+    padding: 8px 10px;
+    font-size: 13px;
+    font-family: inherit;
+    box-sizing: border-box;
+}
+.config-group input:focus {
+    outline: none;
+    border-color: #dd0606;
+}
+
+#payload-list {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.payload-item {
+    background: #080808;
+    border: 1px solid #333333;
+    border-radius: 6px;
+}
+
+.payload-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px 14px;
+    cursor: pointer;
+    user-select: none;
+}
+.payload-header:hover {
+    background: #2a2a2a;
+}
+
+.payload-name {
+    font-size: 13px;
+    font-weight: bold;
+    color: #c9c9c9;
+}
+
+.payload-copy-btn {
+    background: transparent;
+    border: 1px solid #333333;
+    color: #777777;
+    padding: 4px 10px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 11px;
+    font-family: inherit;
+}
+.payload-copy-btn:hover {
+    border-color: #dd0606;
+    color: #dd0606;
+}
+.payload-copy-btn.copied {
+    border-color: #dd0606;
+    color: #dd0606;
+}
+
+.payload-code {
+    display: none;
+    padding: 10px 14px 14px;
+    border-top: 1px solid #333333;
+    font-size: 12px;
+    color: #c9c9c9;
+    white-space: pre-wrap;
+    word-break: break-all;
+    line-height: 1.6;
+    user-select: all;
+}
+
+.payload-item.expanded .payload-code {
+    display: block;
+}

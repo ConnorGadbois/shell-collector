@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shell Collector</title>
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+    <header id="topbar">
+        <h1>Shell Collector</h1>
+        <span id="user-display"></span>
+        <a id="settings-link" href="/settings" class="hidden">Settings</a>
+        <button id="payload-btn">Payload Generator</button>
+        <button id="logout-btn">Logout</button>
+    </header>
+    <div id="pane-container">
+        <aside id="listener-pane">
+            <div class="pane-header"><h2>Listeners</h2></div>
+            <div id="listener-list"></div>
+            <form id="listener-form">
+                <div class="form-row">
+                    <input type="text" id="listener-address" value="0.0.0.0" placeholder="Address">
+                    <input type="number" id="listener-port" placeholder="Port">
+                    <button type="submit" id="start-listener-btn">Start</button>
+                </div>
+                <p id="listener-error" class="error hidden"></p>
+            </form>
+        </aside>
+        <section id="shell-pane">
+            <div class="pane-header">
+                <h2>Shells</h2>
+                <label class="hide-toggle">
+                    <input type="checkbox" id="hide-disconnected" checked>
+                    Hide disconnected
+                </label>
+            </div>
+            <div id="shell-list">
+                <p class="empty-msg" id="no-listener-msg">Select a listener to view shells</p>
+            </div>
+        </section>
+        <section id="terminal-pane">
+            <div id="terminal-output"></div>
+            <form id="command-form">
+                <input type="text" id="command-input" placeholder="Enter command..." disabled>
+                <button type="submit" id="send-btn" disabled>Send</button>
+            </form>
+        </section>
+    </div>
+
+    <div id="payload-overlay" class="modal-overlay hidden">
+        <div class="modal">
+            <div class="modal-header">
+                <h2>Reverse Shell Payloads</h2>
+                <button id="payload-close" class="modal-close">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="payload-config">
+                    <div class="config-group">
+                        <label for="payload-ip">IP</label>
+                        <input type="text" id="payload-ip" placeholder="10.0.0.1">
+                    </div>
+                    <div class="config-group">
+                        <label for="payload-port">Port</label>
+                        <input type="number" id="payload-port" placeholder="4444">
+                    </div>
+                </div>
+                <div id="payload-list"></div>
+            </div>
+        </div>
+    </div>
+
+    <script src="/static/app.js"></script>
+</body>
+</html>
